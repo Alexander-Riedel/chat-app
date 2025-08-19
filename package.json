@@ -4,9 +4,12 @@
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
+    "generate:env": "node scripts/generate-env.mjs",
+    "prestart": "npm run generate:env",
+    "start": "ionic serve",
+    "prebuild": "npm run generate:env",
     "build": "ng build",
+    "ng": "ng",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
