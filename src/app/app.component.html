@@ -1,3 +1,20 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>chat-app</ion-title>
+            <ion-buttons slot="end">
+                <ion-button *ngIf="!(auth.user$ | async)" (click)="auth.signInAnon()">Anon Login</ion-button>
+                <ion-button *ngIf="auth.user$ | async" (click)="auth.signOut()">Logout</ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+        <div *ngIf="auth.uid$ | async as uid; else loggedOut">
+            Angemeldet als: <strong>{{ uid }}</strong>
+        </div>
+        <ng-template #loggedOut> Nicht angemeldet. </ng-template>
+
+        <ion-router-outlet></ion-router-outlet>
+    </ion-content>
 </ion-app>
