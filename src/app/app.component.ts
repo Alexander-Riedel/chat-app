@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { IonApp, IonRouterOutlet, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent } from '@ionic/angular/standalone';
 import { AuthService } from './core/auth.service';
@@ -10,7 +10,9 @@ import { AuthService } from './core/auth.service';
     standalone: true,
 })
 export class AppComponent {
-    auth = inject(AuthService);
+    constructor(public auth: AuthService) { }
 
-    constructor() { }
+    async onLogout() {
+        await this.auth.deleteAnonUser();
+    }
 }

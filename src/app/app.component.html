@@ -4,7 +4,7 @@
             <ion-title>chat-app</ion-title>
             <ion-buttons slot="end">
                 <ion-button *ngIf="!(auth.user$ | async)" (click)="auth.signInAnon()">Anon Login</ion-button>
-                <ion-button *ngIf="auth.user$ | async" (click)="auth.signOut()">Logout</ion-button>
+                <ion-button *ngIf="auth.user$ | async" (click)="onLogout()">Logout</ion-button>
             </ion-buttons>
         </ion-toolbar>
     </ion-header>

@@ -1,5 +1,5 @@
 import { Injectable, inject, runInInjectionContext, Injector } from '@angular/core';
-import { Auth, signInAnonymously, signOut, user } from '@angular/fire/auth';
+import { Auth, signInAnonymously, signOut, deleteUser, user } from '@angular/fire/auth';
 import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
@@ -12,6 +12,14 @@ export class AuthService {
 
     signInAnon() {
         return runInInjectionContext(this.injector, () => signInAnonymously(this.auth));
+    }
+
+    async deleteAnonUser() {
+        return runInInjectionContext(this.injector, async () => {
+            if (this.auth.currentUser) {
+                await deleteUser(this.auth.currentUser);
+            }
+        });
     }
 
     signOut() {
